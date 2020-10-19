@@ -1,0 +1,30 @@
+<form autocomplete="off" #form="ngForm">
+    <div class="autocomplete" style="width: 400px;">
+        <input *ngIf="!config.multiple" [(ngModel)]="config.key ? selectedItem[config.key] : selectedItem" #input
+            [name]="config.name" [placeholder]="config.placeholder" [attr.type]="config.type" [attr.id]="config.inputId"
+            [ngStyle]="config.inputStyle" [class]="config.inputStyleClass" [attr.required]="config.required"
+            (input)="onInputChange($event.target.value)" (click)="onInputClick()" (keydown)="onKeydown($event)">
+
+        <ul *ngIf="config.multiple" class="multiple">
+            <li *ngFor="let item of selectedItems; let index=index;" class="multiple-item">
+                <span>{{ config.key ? item[config.key] : item }}</span>
+                <i (click)="unselectItem(index)" class="close">+</i>
+            </li>
+            <li>
+                <input [(ngModel)]="config.key ? selectedItem[config.key] : selectedItem"
+                    #input [name]="config.name" [placeholder]="config.placeholder" [attr.type]="config.type"
+                    [attr.id]="config.inputId" [ngStyle]="config.inputStyle" [class]="config.inputStyleClass"
+                    [attr.required]="config.required" (input)="onInputChange($event.target.value)"
+                    (click)="onInputClick()" (keydown)="onKeydown($event)">
+            </li>
+        </ul>
+
+        <ul *ngIf="showDropdown" class="autocomplete-items" [style.max-height]="config.scrollHeight + 'px'" #dropdown>
+            <li *ngIf="items.length == 0 && input.value && input.value.length !== 0"> {{ config.noResultFound }}</li>
+            <li *ngFor="let item of items; let index=index" id="dropdown-item-{{index}}"
+                [class.active]="index == highlightItemIndex" (click)="setSelectedItem(item, index)">
+                {{ config.key ? item[config.key] : item }}
+            </li>
+        </ul>
+    </div>
+</form>

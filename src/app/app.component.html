@@ -1,1 +1,7 @@
-<p-inputMask mask="99-999999" [(ngModel)]="title" placeholder="99-999999"></p-inputMask>
+<app-auto-complete 
+    [items]="countries" 
+    [config]="config"
+    (onSelect)="onCountrySelect($event)"
+    (onInputChanged)="onInputChange($event)"
+    (onSearch)="onSearch($event)">
+</app-auto-complete>

@@ -4,10 +4,12 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { InputMaskModule } from 'src/input-mask';
 import { FormsModule } from '@angular/forms';
+import { AutoCompleteComponent } from 'src/auto-complete/auto-complete.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AutoCompleteComponent,
   ],
   imports: [
     BrowserModule,
